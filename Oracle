@@ -1,0 +1,148 @@
+4.1 Creating the dba OS Group
+To create the dba OS group, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following command to check whether the dba OS group exists.
+# grep dba /etc/group
+	If the group exists, run the following command to delete it, and then run the command in the next option to create the group again:
+# /usr/sbin/groupdel dba
+	If the group does not exist, run the following command to create it:
+# /usr/sbin/groupadd -g 200 dba
+
+
+4.2 Creating the oracle OS User
+To create the oracle OS user, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following command to check whether the oracle user exists.
+# grep oracle /etc/passwd
+	If the user exists, run the following command to delete it, and then run the command in the next option to create the user again:
+# /usr/sbin/userdel -f oracle
+	If the user does not exist, run the following command to create it:
+# /usr/sbin/useradd -u 300 -g dba -d /home/oracle -s /bin/bash -m oracle
+ 
+In the preceding command, oracle is the user name and the user belongs to the dba group. 
+
+4.3 Generating a Password for the oracle User
+To generate a password for the oracle user, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following command: 
+# passwd oracle
+
+5.1.1 Assigning Permissions to the /opt/oracle File System
+To assign the 770 permissions to the /opt/oracle file system, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following commands:
+# chown oracle:dba /opt/oracle
+# chmod 770 /opt/oracle
+
+5.1.2 Assigning Permissions to the /opt/orabak File System
+To assign the 770 permissions to the /opt/orabak file system, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following commands:
+# chown oracle:dba /opt/orabak
+# chmod 770 /opt/orabak
+
+5.1.3 Creating and Assigning Permissions to /usr/local/bin
+Check whether /usr/local/bin exists. If not, create and assign the 777 permissions to it.
+To assign the permissions to /usr/local/bin, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following commands:
+# mkdir /usr/local/bin
+# chmod 777 /usr/local/bin
+# ll /usr/local
+drwxrwxrwx  2 root root 4096 2007-05-03 21:24 bin
+
+5.1.4 Assigning Permissions to /tmp
+Check whether the 777 permissions have been assigned to /tmp. If not, assign the permissions to /tmp:
+To assign the permissions to /tmp, do as follows:
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following commands:
+# chmod 777 /tmp
+# ll /
+drwxrwxrwx  17 root root 4096 2008-06-13 10:00 tmp
+
+5.2 Setting Environment Variables for the oracle User
+Step 1	Add the following information to /home/oracle/.profile as the oracle user:
+Set the values in bold type based on the actual situation. 
+# Oracle Environment
+export ORACLE_BASE=/opt/oracle
+export ORACLE_HOME=$ORACLE_BASE/product/9.2
+export ORACLE_SID=instance_name
+export ORACLE_TERM=xterm
+LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib:$ORACLE_HOME/rdbms/lib
+export LD_LIBRARY_PATH
+SHLIB_PATH=$ORACLE_HOME/lib32:$ORACLE_HOME/rdbms/lib32
+export SHLIB_PATH
+# Set shell search paths:
+export PATH=/usr/sbin:$PATH:$ORACLE_HOME/bin:/usr/local/bin
+# CLASSPATH must include the following JRE locations:
+CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+export CLASSPATH=$CLASSPATH:$ORACLE_HOME/network/jlib
+export DBCA_RAW_CONFIG=/opt/oracle/rawdevpath
+export NLS_LANG=AMERICAN_AMERICA.UTF8 or AMERICAN_AMERICA.ZHS16GBK
+
+Step 1	Log in to the system as the root user. 
+Step 2	Run the following commands:
+# cd /opt/orabak
+# chmod 660 ./*
+# gunzip -c ship_9204_linux_disk1.cpio.gz | cpio -idmv &> oracle.cpio.txt
+# gunzip -c ship_9204_linux_disk2.cpio.gz | cpio -idmv &> oracle.cpio.txt
+# gunzip -c ship_9204_linux_disk3.cpio.gz | cpio -idmv &> oracle.cpio.txt
+# unzip p4547809_92080_LINUX.zip -d patch
+# ls
+.  ..  Disk1  Disk2  Disk3  oracle.cpio.txt  patch 
+orarun-1.8-109.15.i586.rpm
+
+# chmod 777 -R /opt/orabak/
+# chown oracle:dba -R /opt/orabak/
+Creating the Inventory Directory
+Run the following commands to create /opt/oracle/oraInventory and set oracle:dba as the owner of the directory:
+# mkdir /opt/oracle/oraInventory
+# chown oracle:dba /opt/oracle/oraInventory
+# chmod 755 /opt/oracle/oraInventory
+
+
+To set the DISPLAY environment variable, do as follows:
+Step 1	Run the following command to change to the oracle user:
+# su - oracle
+Step 2	Set the DISPLAY environment variable. 
+	For a local display, run the following command:
+$ export DISPLAY=localhost:0.0
+	For a remote display, run the following command: 
+$ export DISPLAY=REMOTE_IP:0.0  
+--Example: export DISPLAY=10.71.111.142:0.0
+
+cd /opt/orabak
+# rpm -ivh orarun-1.8-109.15.i586.rpm
+# /usr/sbin/rcoracle start
+
+
+
+$ /opt/orabak/database/runInstaller
+
+======================remove oracle===============
+
+9.1.1 Deleting the $ORACLE_HOME Directory
+The $ORACLE_HOME directory is a system variable configured in the .profile file of the oracle user, for example, /opt/oracle/product/9.2/db.
+To delete the directory, run the following command:
+	Oracle 9i:
+# rm -rf /opt/oracle/product/9.2/db
+	Oracle 11g
+# rm -rf /opt/oracle/product/11gR1/db
+9.1.2 Deleting the $ORACLE_BASE Directory
+The $ORACLE_BASE directory is a system variable configured in the .profile file of the oracle user, for example, /opt/oracle.
+To delete the directory, run the following command:
+# rm -rf /opt/oracle
+9.1.3 Deleting the oracle Directory
+To delete the oracle directory in /var/opt, run the following command:
+# rm -rf /var/opt/oracle
+9.1.4 Deleting the /var/opt/oraInventory Directory
+To delete the oraInventory directory in /var/opt, run the following command:
+# rm -rf /var/opt/oraInventory
+9.1.5 Deleting the /opt/oraInventory Directory
+To delete the oraInventory directory in /opt, run the following command:
+# rm -rf /opt/oraInventory
+9.1.6 Deleting the /etc/ora* File
+To delete the ora* file in /etc, run the following command:
+# rm -f /etc/ora*
+
+
