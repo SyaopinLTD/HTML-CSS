@@ -119,6 +119,15 @@ cd /opt/orabak
 
 $ /opt/orabak/database/runInstaller
 
+
+SLES11:/opt/orabak # /etc/init.d/xdm status
+Checking for service gdm:                                                   running
+SLES11:/opt/orabak #
+SLES11:/opt/orabak #
+SLES11:/opt/orabak # /etc/init.d/xdm start
+Starting service gdm                                                        done
+SLES11:/opt/orabak # /etc/init.d/xdm restart
+
 ======================remove oracle===============
 
 9.1.1 Deleting the $ORACLE_HOME Directory
