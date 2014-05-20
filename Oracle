@@ -128,6 +128,9 @@ SLES11:/opt/orabak # /etc/init.d/xdm start
 Starting service gdm                                                        done
 SLES11:/opt/orabak # /etc/init.d/xdm restart
 
+tcpdump -w /tmp/1521.pcap -i eth0 -s0 port 1521
+
+
 ======================remove oracle===============
 
 9.1.1 Deleting the $ORACLE_HOME Directory
