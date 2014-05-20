@@ -130,6 +130,7 @@ SLES11:/opt/orabak # /etc/init.d/xdm restart
 
 tcpdump -w /tmp/1521.pcap -i eth0 -s0 port 1521
 
+netstat -an|grep 1521| grep LIST
 
 ======================remove oracle===============
 
