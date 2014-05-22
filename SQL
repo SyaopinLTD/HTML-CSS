@@ -21,3 +21,22 @@ id name       d_name
 2  Антон       Поддержка
 4  Борис       Поддержка
 3  Юрий        Логистика
+
+
+SELECT *
+FROM Country
+WHERE Code IN (SELECT CountryCode FROM CountryLanguage)
+
+SELECT *
+FROM Country c
+WHERE EXISTS (
+  SELECT 1 FROM CountryLanguage cl WHERE c.Code = cl.CountryCode
+)
+
+SELECT c.Name
+FROM Country c 
+INNER JOIN CountryLanguage cl ON c.Code = cl.CountryCode
+
+SELECT DISTINCT c.*
+FROM Country c 
+INNER JOIN CountryLanguage cl ON c.Code = cl.CountryCode
