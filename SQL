@@ -1,3 +1,9 @@
+select * 
+from emp t where
+t.sal between 1800 and 3000 
+and t.hiredate > TO_DATE('4/30/1981','MM/DD/YYYY') 
+and t.ename like '%K%'
+
 ==================SQL JOIN/INNER/OUTER====================
 U) users               D) departments
 id name       d_id     id  name
