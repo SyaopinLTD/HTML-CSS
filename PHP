@@ -1,4 +1,11 @@
-
+=========функции===========
+        <?php
+        function greetings($name){
+         echo "Greetings, ". $name . "!";   
+        }
+        $n = "Denis";
+        greetings($n);
+        ?>
 
 ====работа с массивами=========
 $array = array(5, 3, 7, 1);
