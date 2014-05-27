@@ -58,6 +58,21 @@
         echo $bicycle ->honk();
         
       ?>
+      
+      
+            <?php
+      class Person{
+          static public function say(){
+              echo "Here are my thoughts!";
+          }
+      }
+      class Blogger extends Person{
+          const cats = 50;
+      }
+      Blogger::say();
+      echo Blogger::cats;
+      
+      ?>
 =========функции===========
         <?php
         function greetings($name){
