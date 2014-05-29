@@ -54,3 +54,45 @@ echo ${stringZ#a*C}      # 123ABCabc
 echo ${stringZ##a*C}     # abc
 # Удаление самой длинной подстроки.
 
+==========вывод 10ти случайных чисел=============
+#!/bin/bash
+COUNT=1
+MAXCOUNT=10
+while [ "$COUNT" -le $MAXCOUNT ]
+do
+echo "Random number: $RANDOM"
+let "COUNT += 1"
+done
+=================условие===========
+# a=100
+# (( t = a>99?101:98 ))
+# echo $t
+101
+
+===============массивы============
+----инициализация-------
+# area[2]=20
+# area[3]=30
+# area[5]=50
+# echo ${area[5]}
+50
+
+#или так
+ # area2=( 111 222 333 )
+
+# echo ${area2[0]}
+111
+# echo ${area2[1]}
+222
+# echo ${area2[2]}
+333
+
+
+----суммирование-------
+# area[6]=`expr ${area[2]} + ${area[3]}`
+# echo ${area[6]}
+50
+
+
+
+
