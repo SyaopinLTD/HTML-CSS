@@ -17,8 +17,40 @@ echo "$line2"
 
 exit 0
 =================замена части значения в переменной============================
-# b=1023
+# a=1023
 # b=${a/10/xx}
 # echo $b
 xx23
+
+==========вычисление длины строки=================
+# a=sadadasdasdasd
+# echo ${#a}
+14
+# echo `expr length $a`
+
+-----------длина подстроки в строке-------------
+stringZ=abcABC123ABCabc
+#       |------|
+
+echo `expr match "$stringZ" 'abc[A-Z]*.2'`   # 8
+echo `expr "$stringZ" : 'abc[A-Z]*.2'`       # 8
+
+-----------извлечение подстроки------------
+stringZ=abcABC123ABCabc
+echo ${stringZ:0}                            # abcABC123ABCabc
+echo ${stringZ:1}                            # bcABC123ABCabc
+echo ${stringZ:7}                            # 23ABCabc
+
+echo ${stringZ:7:3}                          # 23A
+
+-----------удаление подстроки-------------
+stringZ=abcABC123ABCabc
+#       |----|
+#       |----------|
+
+echo ${stringZ#a*C}      # 123ABCabc
+# Удаление самой короткой подстроки.
+
+echo ${stringZ##a*C}     # abc
+# Удаление самой длинной подстроки.
 
