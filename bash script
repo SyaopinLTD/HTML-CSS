@@ -141,4 +141,11 @@ one two three four five
 # echo ${area2[*]}
 one two three four five
 
+===============проверка условий================
+
+if [ -e script1.sh ]; then  echo "file exists"; fi
+
+# [ -e script10.sh ] || echo "not exist"     #without if
+not exist
+
 
