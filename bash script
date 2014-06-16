@@ -149,3 +149,7 @@ if [ -e script1.sh ]; then  echo "file exists"; fi
 not exist
 
 
+if [ $a -le $b ]; then echo "correct"; fi  #другой вариант: if (( $a<$b )); then echo "correct"; fi
+
+
+ 
