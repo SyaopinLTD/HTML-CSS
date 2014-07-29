@@ -1,3 +1,19 @@
+Проверка oracle
+windows:  tnsping 10.202.62.202 
+linux: su - oracle
+lsnrctl status
+lsnrctl stop/start
+sqlplus /nolog
+connect as sysdba
+scott
+tiger
+SQL>startup
+
+firewall: /sbin/rcSuSEfirewall2 status/stop
+
+
+
+===================================
 4.1 Creating the dba OS Group
 To create the dba OS group, do as follows:
 Step 1	Log in to the system as the root user. 
