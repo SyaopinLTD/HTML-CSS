@@ -1,0 +1,18 @@
+git config --list - просмотреть текущие настройки (например, user.name, user.email, http.proxy)
+git init - инициализация репозитария в текущей директории
+git status - просмотреть статус
+git add '*.txt' - add files to stage 
+git commit -m "Comments to commit" - внести изменения в репозитарий
+git log - просмотреть историю
+git remote add origin https://github.com/try-git/try_git.git - удаленный репозитарий
+git push -u origin master - отправить изменения на удаленный репозитарий (-u - запомнить настройки, чтобы потом использовать просто git push)
+git pull origin master - получить с удаленного репозитария изменения
+git diff HEAD - посмотреть отличия от последнего commit
+git diff --staged - посмотреть отличия staged
+git reset 111.txt - unstage
+git checkout -- target.txt - вернуться к варианту последнего коммита файла, указанного в качестве цели
+git branch new_branch - создать новую ветку
+git checkout new_branch - переключиться на новую ветку
+git rm '*.txt' - удалить файлы и сделать stage
+git merge new_branch - соединить ветку с текущей
+git branch -d new_branch - удалить ветку
